@@ -1,0 +1,17 @@
+replicaCount: 2
+
+image:
+  repository: saharletaief23/proservice
+  tag: expiration-service
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+
+env:
+  MONGO_URI: "mongodb://mongo-service:27017/expiration"
+  NODE_ENV: "development"
+  JWT_KEY_SECRET: jwt-secret
+  RABBITMQ_SECRET: rabbitmq-secret
+  REDIS_HOST: expiration-redis-service
