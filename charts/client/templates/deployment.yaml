@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "client-chart.fullname" . }}
+  name: client-{{ .Release.Name }}
   labels:
-    app: {{ include "client-chart.name" . }}
+    app: client
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "client-chart.name" . }}
+      app: client
   template:
     metadata:
       labels:
-        app: {{ include "client-chart.name" . }}
+        app: client
     spec:
       imagePullSecrets:
         {{- range .Values.imagePullSecrets }}
