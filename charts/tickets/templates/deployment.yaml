@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "tickets-chart.fullname" . }}
+  name: tickets-{{ .Release.Name }}
   labels:
-    app: {{ include "tickets-chart.name" . }}
+    app: tickets
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "tickets-chart.name" . }}
+      app: tickets
   template:
     metadata:
       labels:
-        app: {{ include "tickets-chart.name" . }}
+        app: tickets
     spec:
       imagePullSecrets:
         {{- range .Values.imagePullSecrets }}

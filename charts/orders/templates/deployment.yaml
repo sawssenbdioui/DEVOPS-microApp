@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "orders-chart.fullname" . }}
+  name: orders-{{ .Release.Name }}
   labels:
-    app: {{ include "orders-chart.name" . }}
+    app: orders
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "orders-chart.name" . }}
+      app: orders
   template:
     metadata:
       labels:
-        app: {{ include "orders-chart.name" . }}
+        app: orders
     spec:
       imagePullSecrets:
         {{- range .Values.imagePullSecrets }}

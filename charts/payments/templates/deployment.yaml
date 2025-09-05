@@ -2,7 +2,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "payments-chart.fullname" . }}-payments
+  name: payments-{{ .Release.Name }}
+  labels:
+    app: payments
 spec:
   selector:
     app: payments
@@ -18,7 +20,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "payments-chart.fullname" . }}-mongo
+  name: payments-mongo-{{ .Release.Name }}
+  labels:
+    app: payments-mongo
 spec:
   selector:
     app: payments-mongo
