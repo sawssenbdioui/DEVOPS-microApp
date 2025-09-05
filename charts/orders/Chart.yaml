@@ -1,5 +1,5 @@
 apiVersion: v2
-name: orders-chart
+name: orders
 description: Helm chart for Orders Service
 version: 0.1.0
 appVersion: "1.0"
