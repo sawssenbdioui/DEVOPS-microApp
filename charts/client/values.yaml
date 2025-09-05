@@ -1,0 +1,10 @@
+replicaCount: 2
+image:
+  repository: saharletaief23/proservice
+  tag: client-service
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 3000
+imagePullSecrets:
+  - name: docker-cred

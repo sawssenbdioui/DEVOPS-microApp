@@ -1,0 +1,23 @@
+# Payments service
+replicaCount: 2
+image:
+  repository: saharletaief23/proservice
+  tag: payments-service
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 3000
+env:
+  MONGO_URI: "mongodb://payments-mongo-srv:27017/payments"
+  NODE_ENV: "development"
+  JWT_SECRET_NAME: "jwt-secret"
+  JWT_KEY: "JWT_KEY"
+  RABBITMQ_URL: "amqp://ticketuser:user@rabbit-service.default.svc.cluster.local:5672"
+imagePullSecrets:
+  - name: docker-cred
+
+# Payments MongoDB
+mongo:
+  replicaCount: 1
+  image: mongo
+  servicePort: 27017

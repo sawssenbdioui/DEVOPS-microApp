@@ -1,0 +1,29 @@
+# Payments Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "payments-chart.fullname" . }}-payments
+spec:
+  selector:
+    app: payments
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+  type: {{ .Values.service.type }}
+
+---
+
+# Payments MongoDB Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "payments-chart.fullname" . }}-mongo
+spec:
+  selector:
+    app: payments-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: {{ .Values.mongo.servicePort }}
+      targetPort: {{ .Values.mongo.servicePort }}

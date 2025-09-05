@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tickets-chart.fullname" . }}
+  labels:
+    app: {{ include "tickets-chart.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "tickets-chart.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "tickets-chart.name" . }}
+    spec:
+      imagePullSecrets:
+        {{- range .Values.imagePullSecrets }}
+        - name: {{ .name }}
+        {{- end }}
+      containers:
+        - name: tickets
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: MONGO_URI
+              value: {{ .Values.env.MONGO_URI | quote }}
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.env.JWT_SECRET_NAME }}
+                  key: {{ .Values.env.JWT_KEY }}
+            - name: RABBITMQ_URL
+              value: {{ .Values.env.RABBITMQ_URL | quote }}
