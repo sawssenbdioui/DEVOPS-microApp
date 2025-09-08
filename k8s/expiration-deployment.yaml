@@ -32,7 +32,8 @@ spec:
                   name: jwt-secret
                   key: JWT_KEY
             - name: RABBITMQ_URL
-              value: "amqp://guest:guest@rabbit-service:5672" #define with secret in production
+              #value: "amqp://guest:guest@rabbit-service:5672" #define with secret in production
+              value: "amqp://sahar:admin@rabbit-service:5672" #define with secret in production
             - name: REDIS_HOST
               value: expiration-redis-service
 
